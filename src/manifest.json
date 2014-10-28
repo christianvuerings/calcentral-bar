@@ -1,0 +1,17 @@
+{
+  "name": "BETA - CalCentral Bar",
+  "short_name": "CalCentral Bar",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Add a CalCentral bar to the top of the SIS portal.",
+  "content_scripts": [
+    {
+      "css": ["css/calcentral-bar.css"],
+      "js": ["js/calcentral-bar.js"],
+      "matches": ["https://sis-demo-01.is.berkeley.edu/*",
+        "https://sis-demo-02.is.berkeley.edu/*",
+        "https://sis-demo-03.is.berkeley.edu/*"]
+    }
+  ],
+  "permissions" : []
+}

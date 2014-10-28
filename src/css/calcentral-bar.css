@@ -1,0 +1,46 @@
+/* Top Bar PeopleSoft elements overrides */
+#pthdr2bkgrnd, #pthdr2curve, #pthdr2linkcurve, #pthdr2logimg, #pthdr2shadow {
+  display: none;
+}
+
+#pthdr2container {
+  background: #002e5b;
+}
+#pthdr2logo {
+  margin-left: 10px;
+}
+#pthdr2links {
+  background: transparent;
+  background-image: none !important;
+  font-family: Arial, sans-serif;
+  height: auto !important;
+  margin: 0 !important;
+}
+#pthdr2links a {
+  color: #fff;
+  display: block;
+  float: left;
+  font-size: 14px;
+  padding: 13px 10px;
+  text-decoration: none !important;
+}
+#pthdr2links a:hover, #pthdr2links a:focus {
+  text-decoration: underline !important;
+}
+
+/* Custom CSS for CalCentral bar */
+.cc-calcentral-logo-container {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  padding-bottom: 30%; /* depends on svg ratio, for my zebra height/width = 1.2 so padding-bottom = 50% * 1.2 = 60% */
+  vertical-align: middle; /* top | middle | bottom ... do what you want */
+  width: 100%;
+}
+.cc-calcentral-logo { /* svg into : object, img or inline */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* only required for <img /> */
+}
