@@ -1,31 +1,94 @@
-// ==UserScript==
-// @name           CalCentral Bar
-// @version        0.0.1
-// @namespace      http://denbuzze.com/
-// @description    Add a CalCentral bar to the top of the SIS portal.
-// ==/UserScript==
-
 (function(){
 
-  var addLogo = function() {
-    var calcentralLogo = '<a href="https://calcentral.berkeley.edu" class="cc-calcentral-logo-container"><svg class="cc-calcentral-logo" xmlns="http://www.w3.org/2000/svg" width="350" height="40" viewBox="1.61 1.403 350 40" enable-background="new 1.61 1.403 350 40"><style>.cc-svg-calcentral-logo-gold { fill: #f1a91e; } .cc-svg-calcentral-logo-white { fill: #fff; }</style><path  class="cc-svg-calcentral-logo-gold" d="M29.65 9.658c-2.7-1.728-5.832-2.7-9.396-2.7-7.344 0-12.744 5.238-12.744 14.418 0 8.91 5.13 14.472 12.853 14.472 3.672 0 7.128-1.295 9.45-3.022l.647 3.4c-2.483 1.62-6.21 2.755-10.15 2.755C10.534 38.98 4 32.177 4 21.485 4 10.738 10.858 3.826 20.31 3.826c4.103 0 7.937 1.242 10.42 2.754l-1.08 3.078zm36.935 28.62h-3.51L59.51 28.61H44.23l-3.564 9.667h-3.51l12.798-33.75h4.05l12.58 33.75zM51.898 7.93l-6.48 17.55h12.906L51.898 7.93zm23.058 30.347V4.527h3.456v30.51h16.686v3.24H74.956z"/><path class="cc-svg-calcentral-logo-white" d="M128.415 12.088c-2.7-1.782-5.616-2.7-8.856-2.7-6.59 0-10.963 4.536-10.963 11.88 0 7.452 4.266 12.15 11.07 12.15 3.456 0 6.75-1.297 9.234-3.024l1.242 6.05c-2.7 1.618-6.912 2.645-10.746 2.645-10.368 0-17.442-6.533-17.442-17.605 0-10.8 7.074-17.767 17.604-17.767 3.942 0 7.992 1.026 10.908 2.646l-2.05 5.724zm12.797 26.19V4.527h23.005v5.562h-16.524v8.48h13.555v5.56h-13.555v8.588h16.524v5.562h-23.005v-.003zm57.403-33.75h6.264v34.076h-7.02l-16.147-24.84V38.28h-6.265V4.53h7.183l15.985 24.57V4.528zm33.965 5.778V38.28h-6.533V10.305h-11.285V4.528h29.105v5.778H232.58zm27.756 27.97h-6.588V4.53h11.826c8.53 0 13.068 4.05 13.068 10.26 0 4.806-2.7 8.153-7.29 9.72l8.854 13.77H272.7l-7.506-12.365-4.86.323v12.04h.002zm4.86-17.333c4.052-.215 6.696-2.05 6.696-5.725 0-3.51-2.646-5.184-7.344-5.184h-4.268V21.05l4.917-.107zm53.245 17.334h-6.644l-2.807-7.99h-13.61l-2.754 7.99h-6.643l12.312-33.75h7.992l12.154 33.75zm-16.2-28.08l-5.13 14.635h10.206l-5.076-14.634zm25.164 28.08V4.527h6.588V32.5h15.23v5.777h-21.818z"/></svg><a>';
-    document.getElementById('pthdr2logo').innerHTML = calcentralLogo;
+  var topPeopleSoftContainer = document.getElementById('pthdr2container');
+  var topContainer;
+  var homeLink = {};
+
+  var createTopContainer = function() {
+    topContainer = document.createElement('div');
+    topContainer.setAttribute('class', 'cc-calcentral-bar cc-calcentral-clearfix-container');
   };
 
-  var addLinks = function() {
-    var topLinks = document.querySelectorAll('#pthdr2links a');
-    var linksContainer = document.getElementById('pthdr2links');
-    linksContainer.innerHTML = '';
-    for (var i = 0; i < topLinks.length; i++) {
-      console.log(i);
-      console.log(topLinks[i]);
-      linksContainer.appendChild(topLinks[i]);
+  var addLogo = function() {
+    var calcentralLogo = document.createElement('a');
+    calcentralLogo.setAttribute('href', homeLink.href);
+    calcentralLogo.setAttribute('title', 'Return Home');
+    calcentralLogo.setAttribute('class', 'cc-calcentral-logo');
+    calcentralLogo.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="45" height="35" viewBox="227.8 181.7 45 35" enable-background="new 227.8 181.7 45 35"><path fill="#FDB515" d="M228.2 216.7c.1-.3.3-.7.5-.9.4-.5 1.1-1.1 2-1.7 1.4-.9 2.7-1.5 4.3-1.9 2.4-.6 4.9-.7 7.1-.7h.1c2.9 0 9.1.4 13.6.6 2.4.1 4.3.3 4.9.3h1c2.8 0 3.7-.4 4.1-.7.5-.3 1-.6.9-.9-.1-.4-1-.4-1.4-.4-1.4-.2-2.7-.8-3.6-1.4-1-.7-1.7-2-1.7-2l-.7.5c-2.5 1.7-4.5 2.4-6.5 2.4h-.3c-1.1 0-2-.5-2.2-.9l-.4-.7-.7.6c-.9.8-2.1 1-2.6 1.1h-.6c-1.1 0-2.1-.4-2.9-1.1-.1-.1-.5-.6-.6-.7l-.5-.7-.6.5c-.2.2-.9.6-1 .7-1.4.8-3 1.2-4.5 1.2-1.4 0-2.7-.3-3.9-1-2.7-1.5-3.1-4.5-3-6.8.2-3.1 1.3-6.1 3.3-9.1 1.7-2.6 4.2-5 7-7.1 2-1.5 5.2-3.4 8.5-3.9.6-.1 1.2-.2 1.8-.2.7 0 1.2.1 1.6.3 1 .6 1 1.9.9 2.5-.3 2.5-2.6 5.5-5 5.5-.5 0-.9-.2-1.1-.5-.2-.2-.2-.5-.1-.8.2-.8 1-1.1 2.2-1.4.1 0 .2-.1.3-.1 2-.6 2.3-1.8 2.2-2.7-.1-.6-.5-1.3-1.6-1.3-1 0-2.2.6-2.4.7-2.7 1.4-4.5 3.6-6.3 5.9-3.6 4.9-5.4 9.5-5.1 13.9.1 1.9 1.4 4 3.4 4 .7 0 1.3-.2 1.9-.7 1-.7 1.6-1.9 2.1-2.9.1-.3.3-.5.4-.8.8-1.4 1.7-2.6 2.7-3.7 1.2-1.1 2.5-1.9 3.9-2.3.7-.2 1.4-.3 2.2-.3.8 0 1.2.5 1.4.8.1-.3.4-.7.4-.8.1-.1 1.4-.1 1.8 0 .3 0 1.4 0 1.5.1.2.2-.3 1-.7 2.3-.2.6-.5 1.3-.9 2.2-.1.3-.3.7-.4 1-1.1 2.7-1.8 4.5-.6 5.1.2.1.5.2.8.2.8 0 1.7-.6 2.3-1 .1 0 .1-.1.2-.1.7-.5 1.1-.8 1.5-1.1l.2-.2v-.3c-.2-3 .2-6.3 1.1-8.5 1.3-3.2 3.1-6 5.3-8.2 1.1-1.1 3.9-3.2 5.5-3.2 1.3 0 .9 2.3.8 2.8-.3 1.2-1.6 4.8-3.9 8.6-.8 1.3-2.4 3.5-3.5 5.1-.5.7-.9 1.3-1.1 1.5l-.1.2v.2c-.2 1.8.8 3.6 1.8 4.6.9 1 1.9 1.3 2.8 1.6.3.1.7.2 1 .4.3.1.7.3.7.6.1.3-.1.7-.5 1.2-2 2.5-4.5 3.2-6.9 3.7-1.4.3-3.1.4-5.2.4-1.4 0-2.8-.1-4.2-.1-.5 0-1 0-1.5-.1-1.6-.1-3.3-.2-4.9-.2-1.5-.1-3-.2-4.3-.2-1.1 0-2.2-.1-3.1-.1-2.7 0-5 .2-6.9.5-.9.1-1.6.3-2.3.5-.2.1-.4.1-.6.2-.1 0-.2.1-.3.1-.1-.3-.5-.2-.8-.2zm23.7-18.3c-.7 0-2.5.9-3.9 3.6-.3.6-1.4 3.2-.8 4.4.2.4.5.6.9.7h.3c1.2 0 2.1-1.7 3-3.7.1-.2.1-.3.2-.4.2-.5 1.1-2.6 1.3-3.4 0-.5.1-1.2-1-1.2zm18.9-10.6c-.3-.2-1.1.4-1.1.4-1.5 1.2-2.6 2.7-3.6 4.4-2.6 4.5-2.3 8-2.3 8s1.3-1.5 1.6-2c.4-.7 2-2.9 3-4.5 1-1.7 2.1-4.1 2.4-4.9 0-.1.4-1.1 0-1.4z"/></svg>';
+    topContainer.appendChild(calcentralLogo);
+  };
+
+  var addCalCentralLink = function() {
+    var pthdr2home = document.getElementById('pthdr2home');
+    homeLink.href = pthdr2home.getAttribute('href');
+    var calcentralLink = document.createElement('a');
+    calcentralLink.setAttribute('href', 'https://calcentral.berkeley.edu');
+    calcentralLink.setAttribute('class', 'cc-calcentral-link');
+    calcentralLinkText = document.createTextNode('CalCentral');
+    calcentralLink.appendChild(calcentralLinkText);
+    pthdr2home.parentNode.replaceChild(calcentralLink, pthdr2home);
+  };
+
+  var addLinkEvent = function(element) {
+    var id = element.id;
+    var psEvent = '';
+    if (id === 'pthdr2mcf') {
+      psEvent = 'PopupMCFConsole';
+    } else if (id === 'pthdr2cti') {
+      psEvent = 'PopupCTIConsole';
+    } else if (id === 'pthdr2ppm') {
+      psEvent = 'PopupPPMConsole';
+    }
+
+    if (psEvent) {
+      element.addEventListener('click', function(evt) {
+        if (window[psEvent]) {
+          window[psEvent]();
+          evt.preventDefault();
+        }
+      });
     }
   };
 
+  var addNav = function() {
+    var nav = document.createElement('nav');
+
+    var menuButton = document.createElement('button');
+    menuButton.setAttribute('class', 'cc-calcentral-menu-toggle');
+    menuButton.setAttribute('type', 'button');
+    menuButtonText = document.createTextNode('Menu');
+    menuButton.appendChild(menuButtonText);
+
+    //  Toggle the class on click to show / hide the menu
+    menuButton.onclick = function() {
+      this.classList.toggle('cc-calcentral-menu-toggle-active');
+    };
+    nav.appendChild(menuButton);
+
+    var ul = document.createElement('ul');
+    ul.setAttribute('class', 'cc-calcentral-links');
+    var topLinks = document.querySelectorAll('#pthdr2links a');
+    for (var i = 0; i < topLinks.length; i++) {
+      var li = document.createElement('li');
+      // addLinkEvent(topLinks[i]);
+      li.appendChild(topLinks[i]);
+      ul.appendChild(li);
+    }
+    nav.appendChild(ul);
+    topContainer.appendChild(nav);
+  };
+
+  var addContainer = function() {
+    console.log(topPeopleSoftContainer.parentNode);
+    topPeopleSoftContainer.parentNode.replaceChild(topContainer, topPeopleSoftContainer);
+  };
+
   var addTopBar = function() {
+    createTopContainer();
+    addCalCentralLink();
     addLogo();
-    addLinks();
+    addNav();
+    addContainer();
   };
 
   addTopBar();

@@ -1,46 +1,97 @@
 /* Top Bar PeopleSoft elements overrides */
-#pthdr2bkgrnd, #pthdr2curve, #pthdr2linkcurve, #pthdr2logimg, #pthdr2shadow {
-  display: none;
+#pthdr2container {
+  display: none !important;
 }
 
-#pthdr2container {
-  background: #002e5b;
+/* Custom CSS for CalCentral bar */
+.cc-calcentral-bar {
+  background: #003a70;
 }
-#pthdr2logo {
-  margin-left: 10px;
+.cc-calcentral-bar ul {
+  margin: 0;
+  padding: 0;
 }
-#pthdr2links {
-  background: transparent;
-  background-image: none !important;
-  font-family: Arial, sans-serif;
-  height: auto !important;
-  margin: 0 !important;
+.cc-calcentral-bar *, .cc-calcentral-bar *:before, .cc-calcentral-bar *:after {
+  box-sizing: inherit;
 }
-#pthdr2links a {
+.cc-calcentral-links {
+  float: right;
+  list-style-type: none;
+}
+.cc-calcentral-links li {
+  display: block;
+  float: left;
+}
+.cc-calcentral-links a {
   color: #fff;
   display: block;
   float: left;
   font-size: 14px;
   padding: 13px 10px;
-  text-decoration: none !important;
+  text-decoration: none;
 }
-#pthdr2links a:hover, #pthdr2links a:focus {
-  text-decoration: underline !important;
-}
-
-/* Custom CSS for CalCentral bar */
-.cc-calcentral-logo-container {
-  display: inline-block;
-  position: relative;
-  max-width: 100%;
-  padding-bottom: 30%; /* depends on svg ratio, for my zebra height/width = 1.2 so padding-bottom = 50% * 1.2 = 60% */
-  vertical-align: middle; /* top | middle | bottom ... do what you want */
-  width: 100%;
+.cc-calcentral-links a:hover, .cc-calcentral-links a:focus {
+  text-decoration: underline;
 }
 .cc-calcentral-logo { /* svg into : object, img or inline */
   display: block;
+  float: left;
+  height: 35px;
+  padding: 3px 10px;
+  width: 65px;
+}
+
+.cc-calcentral-menu-toggle {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  float: right;
+  font-size: 14px;
+  padding: 12px 35px 13px 5px;
+  position: relative;
+}
+.cc-calcentral-menu-toggle:before {
+  border-bottom: 3px solid #fff;
+  border-top: 9px double #fff;
+  content: "";
+  height: 3px;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* only required for <img /> */
+  right: 5px;
+  top: 13px;
+  width: 20px;
+}
+
+@media (max-width: 750px) {
+  .cc-calcentral-menu-toggle {
+    display: block;
+  }
+  .cc-calcentral-links {
+    background: #2d637f;
+    clear: both;
+    float: none;
+    max-height: 0;
+    overflow: hidden;
+  }
+  .cc-calcentral-links li {
+    clear: both;
+    float: none;
+  }
+  .cc-calcentral-links li a {
+    width: 100%;
+  }
+  .cc-calcentral-menu-toggle-active + .cc-calcentral-links {
+    max-height: 500px;
+  }
+}
+
+/* Useful */
+.cc-calcentral-clearfix-container:before,
+.cc-calcentral-clearfix-container:after {
+  content: " ";
+  display: table;
+}
+.cc-calcentral-clearfix-container:after {
+  clear: both;
 }
