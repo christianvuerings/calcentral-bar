@@ -1,7 +1,6 @@
 /* Top Bar PeopleSoft elements overrides */
 #pthdr2container {
   /*display: none !important;*/
-  height: 0 !important;
   overflow: hidden;
 }
 
@@ -75,6 +74,12 @@
     float: none;
     max-height: 0;
     overflow: hidden;
+
+    -webkit-transition: max-height .4s;
+    -moz-transition: max-height .4s;
+    -o-transition: max-height .4s;
+    -ms-transition: max-height .4s;
+    transition: max-height .4s;
   }
   .cc-calcentral-links li {
     clear: both;
@@ -84,7 +89,7 @@
     width: 100%;
   }
   .cc-calcentral-menu-toggle-active + .cc-calcentral-links {
-    max-height: 500px;
+    max-height: 300px;
   }
 }
 

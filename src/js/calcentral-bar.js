@@ -96,6 +96,7 @@
   var findTopBar = function() {
     topPeopleSoftContainer = document.getElementById('pthdr2container');
     if (topPeopleSoftContainer) {
+      topPeopleSoftContainer.style.cssText += ';height: 0 !important;';
       addTopBar();
     } else {
       // Sometimes this gets loaded too fast, so we need to retry in that case
@@ -103,8 +104,10 @@
     }
   };
 
-  setTimeout(function() {
-    findTopBar();
-  }, 1);
+  if (window && window.Element && window.Element.prototype.addEventListener && !navigator.userAgent.match(/Trident.*rv[ :]*11\./)) {
+    setTimeout(function() {
+      findTopBar();
+    }, 1);
+  }
 
 })();
