@@ -1,6 +1,8 @@
 /* Top Bar PeopleSoft elements overrides */
 #pthdr2container {
-  display: none !important;
+  /*display: none !important;*/
+  height: 0 !important;
+  overflow: hidden;
 }
 
 /* Custom CSS for CalCentral bar */
